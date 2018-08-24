@@ -1,9 +1,10 @@
-import AboutView from '@/views/AboutView.vue'
+import ABOUT_DATA from '@/constants/ABOUT_DATA'
+import About from '@/components/About.vue'
 
 export default {
-  path: '/about',
-  component: AboutView,
+  path: ABOUT_DATA.path,
+  component: About,
   props: {
-    pageTitle: 'О проекте'
+    pageTitle: ABOUT_DATA.title
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <div class="header">
     <div class="header__title">{{title}}</div>
+    Шапка
   </div>
 </template>
 
@@ -16,4 +17,6 @@ export default {
 </script>
 
 <style lang="sass">
+.header
+  border: 1px solid #ccc
 </style>

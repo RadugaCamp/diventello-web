@@ -1,12 +1,12 @@
 <template>
-  <div class="about">
-    about
+  <div class="song">
+    Текст песни
   </div>
 </template>
 
 <script>
 export default {
-  name: 'About'
+  name: 'Song'
 }
 </script>
 

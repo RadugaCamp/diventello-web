@@ -16,16 +16,15 @@
 </template>
 
 <script>
-import TheHeader from './TheHeader'
-import TheMenu from './TheMenu'
-import TheFooter from './TheFooter'
+import TheHeader from '@/components/TheHeader'
+import TheMenu from '@/components/TheMenu'
+import TheFooter from '@/components/TheFooter'
 
 export default {
-  name: 'CommonView',
+  name: 'Layout',
   props: {
     pageTitle: {
-      type: String,
-      default: ''
+      type: String
     }
   },
   components: { TheHeader, TheMenu, TheFooter },
@@ -43,4 +42,10 @@ export default {
 </script>
 
 <style lang="sass">
+.page
+  font-family: Arial, sans-serif
+  color: #2c3e50
+
+  &__content
+    background: #acb
 </style>

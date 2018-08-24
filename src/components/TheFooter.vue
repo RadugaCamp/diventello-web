@@ -11,4 +11,6 @@ export default {
 </script>
 
 <style lang="sass">
+.footer
+  border: 1px solid #ccc
 </style>
