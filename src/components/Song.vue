@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import __DATA__ from './__DATA__.js'
+
 export default {
   name: 'Song',
   data () {
@@ -65,158 +67,7 @@ export default {
     }
   },
   created () {
-    this.song = {
-      rows: [
-        [
-          {
-            word: 'Студенты',
-            active: false,
-            chords: [
-              {
-                value: '',
-                position: 'left'
-              },
-              {
-                value: '',
-                position: 'center'
-              },
-              {
-                value: '',
-                position: 'right'
-              }
-            ]
-          },
-          {
-            word: 'вузов',
-            active: false,
-            chords: [
-              {
-                value: 'C',
-                position: 'left'
-              },
-              {
-                value: '',
-                position: 'center'
-              },
-              {
-                value: 'Dm',
-                position: 'right'
-              }
-            ]
-          },
-          {
-            word: 'смогут',
-            active: false,
-            chords: [
-              {
-                value: '',
-                position: 'left'
-              },
-              {
-                value: '',
-                position: 'center'
-              },
-              {
-                value: '',
-                position: 'right'
-              }
-            ]
-          },
-          {
-            word: 'получить',
-            active: false,
-            chords: [
-              {
-                value: '',
-                position: 'left'
-              },
-              {
-                value: '',
-                position: 'center'
-              },
-              {
-                value: '',
-                position: 'right'
-              }
-            ]
-          }
-        ],
-        [
-          {
-            word: 'Студенты',
-            active: false,
-            chords: [
-              {
-                value: '',
-                position: 'left'
-              },
-              {
-                value: '',
-                position: 'center'
-              },
-              {
-                value: '',
-                position: 'right'
-              }
-            ]
-          },
-          {
-            word: 'вузов',
-            active: false,
-            chords: [
-              {
-                value: 'C',
-                position: 'left'
-              },
-              {
-                value: '',
-                position: 'center'
-              },
-              {
-                value: 'Dm',
-                position: 'right'
-              }
-            ]
-          },
-          {
-            word: 'смогут',
-            active: false,
-            chords: [
-              {
-                value: '',
-                position: 'left'
-              },
-              {
-                value: '',
-                position: 'center'
-              },
-              {
-                value: '',
-                position: 'right'
-              }
-            ]
-          },
-          {
-            word: 'получить',
-            active: false,
-            chords: [
-              {
-                value: '',
-                position: 'left'
-              },
-              {
-                value: '',
-                position: 'center'
-              },
-              {
-                value: '',
-                position: 'right'
-              }
-            ]
-          }
-        ]
-      ]
-    }
+    this.song = __DATA__
   },
   methods: {
     setChord (wordPath) {
@@ -225,7 +76,6 @@ export default {
     },
     clickOutsideWord (event) {
       this.deactiveWords()
-      console.log('click-outside')
     },
     deactiveWords () {
       this.activeWordPath = []
