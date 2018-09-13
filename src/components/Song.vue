@@ -1,9 +1,37 @@
 <template>
-  <div class="song has-chords">
-    <div v-for="(row, index) in song.rows" :key="index" class="song__row">
-      <span v-for="(wordItem, index) in row" :key="index" class="word song__word">
-        <span v-for="(chord, index) in wordItem.chords" :key="index" :class="chord.position" class="chord song__chord">{{chord.value}}</span>
-        <span class="word__content">{{wordItem.word}}</span>
+  <div class="song has-chords" v-click-outside="clickOutsideWord">
+    <div
+      v-for="(row, rowIndex) in song.rows"
+      :key="rowIndex"
+      class="song__row"
+    >
+      <span
+        v-for="(wordInfo, wordIndex) in row"
+        :key="wordIndex"
+        class="word song__word"
+      >
+        <span
+          v-for="(chord, chordIndex) in wordInfo.chords"
+          :key="chordIndex"
+          :class="chord.position"
+          class="chord song__chord"
+        >{{chord.value}}</span>
+        <span
+          @click="setChord([rowIndex, wordIndex])"
+          class="word__content"
+        >{{wordInfo.word}}</span>
+        <span
+          v-if="wordInfo.active"
+          class="word__chord-box"
+        >
+          <input
+            v-for="(chord, chordIndex) in wordInfo.chords"
+            :key="chordIndex"
+            v-model="chord.value"
+            @keyup.enter="deactiveWords"
+            type="text"
+          >
+        </span>
       </span>
     </div>
   </div>
@@ -14,96 +42,244 @@ export default {
   name: 'Song',
   data () {
     return {
-      song: {}
+      song: {},
+      activeWordPath: []
+    }
+  },
+  computed: {
+    activeWord () {
+      if (this.activeWordPath.length) {
+        return this.getWord(this.activeWordPath)
+      }
+      return {}
+    }
+  },
+  watch: {
+    activeWordPath (path, oldPath) {
+      if (path.join() !== oldPath.join()) {
+        // Фильтруем только реально существующий путь
+        if (oldPath.length === 2) {
+          this.triggerWordActiveStatus(this.getWord(oldPath), false)
+        }
+      }
     }
   },
   created () {
     this.song = {
       rows: [
         [
-          { word: 'Не' },
           {
-            word: 'горюй,',
+            word: 'Студенты',
+            active: false,
+            chords: [
+              {
+                value: '',
+                position: 'left'
+              },
+              {
+                value: '',
+                position: 'center'
+              },
+              {
+                value: '',
+                position: 'right'
+              }
+            ]
+          },
+          {
+            word: 'вузов',
+            active: false,
             chords: [
               {
                 value: 'C',
-                position: 'center'
-              }
-            ]
-          },
-          { word: 'когда' },
-          { word: 'не' },
-          {
-            word: 'везет,',
-            chords: [
+                position: 'left'
+              },
               {
-                value: 'Am',
+                value: '',
                 position: 'center'
-              }
-            ]
-          }
-        ],
-        [
-          { word: 'И' },
-          {
-            word: 'когда',
-            chords: [
+              },
               {
                 value: 'Dm',
-                position: 'center'
+                position: 'right'
               }
             ]
           },
-          { word: 'ты' },
-          { word: 'кому-то' },
-          { word: 'не' },
           {
-            word: 'нравишься,',
+            word: 'смогут',
+            active: false,
             chords: [
               {
-                value: 'G',
+                value: '',
+                position: 'left'
+              },
+              {
+                value: '',
                 position: 'center'
+              },
+              {
+                value: '',
+                position: 'right'
+              }
+            ]
+          },
+          {
+            word: 'получить',
+            active: false,
+            chords: [
+              {
+                value: '',
+                position: 'left'
+              },
+              {
+                value: '',
+                position: 'center'
+              },
+              {
+                value: '',
+                position: 'right'
               }
             ]
           }
         ],
         [
-          { word: 'И' },
-          { word: 'когда' },
-          { word: 'душа' },
-          { word: 'не' },
-          { word: 'поет' }
-        ],
-        [
-          { word: 'И' },
-          { word: 'друзья' },
-          { word: 'твои' },
-          { word: 'разбегаются,' }
-        ],
-        [
-          { word: 'И' },
-          { word: 'погода' },
-          { word: 'прячет' },
-          { word: 'солнце' }
-        ],
-        [
-          { word: 'От' },
-          { word: 'тебя' },
-          { word: 'на' },
-          { word: 'зло,' }
-        ],
-        [
-          { word: 'И' },
-          { word: 'тебе' },
-          { word: 'ответил' },
-          { word: 'кто-то' }
-        ],
-        [
-          { word: 'Больно' },
-          { word: 'и' },
-          { word: 'зло.' }
+          {
+            word: 'Студенты',
+            active: false,
+            chords: [
+              {
+                value: '',
+                position: 'left'
+              },
+              {
+                value: '',
+                position: 'center'
+              },
+              {
+                value: '',
+                position: 'right'
+              }
+            ]
+          },
+          {
+            word: 'вузов',
+            active: false,
+            chords: [
+              {
+                value: 'C',
+                position: 'left'
+              },
+              {
+                value: '',
+                position: 'center'
+              },
+              {
+                value: 'Dm',
+                position: 'right'
+              }
+            ]
+          },
+          {
+            word: 'смогут',
+            active: false,
+            chords: [
+              {
+                value: '',
+                position: 'left'
+              },
+              {
+                value: '',
+                position: 'center'
+              },
+              {
+                value: '',
+                position: 'right'
+              }
+            ]
+          },
+          {
+            word: 'получить',
+            active: false,
+            chords: [
+              {
+                value: '',
+                position: 'left'
+              },
+              {
+                value: '',
+                position: 'center'
+              },
+              {
+                value: '',
+                position: 'right'
+              }
+            ]
+          }
         ]
       ]
+    }
+  },
+  methods: {
+    setChord (wordPath) {
+      this.setActiveWordPath(wordPath)
+      this.triggerWordActiveStatus(this.activeWord)
+    },
+    clickOutsideWord (event) {
+      this.deactiveWords()
+      console.log('click-outside')
+    },
+    deactiveWords () {
+      this.activeWordPath = []
+    },
+
+    /**
+     * Helpers
+     */
+    getWord (path) {
+      if (this.isCorrectWordPath(path)) {
+        let [row, word] = path
+        return this.song.rows[row][word]
+      }
+      throw new Error('Song comp: getWord method, wordPath is incorrect')
+    },
+    setActiveWordPath (path) {
+      if (this.isCorrectWordPath(path)) {
+        this.activeWordPath = path
+      } else {
+        throw new Error('Song comp: setActiveWordPath method, incorrect argument')
+      }
+    },
+    triggerWordActiveStatus (item, status) {
+      if (item) {
+        if (typeof status === 'boolean') {
+          item.active = status
+        } else {
+          item.active = !item.active
+        }
+      } else {
+        throw new Error('Song comp: triggerActive method, item argument isn\'t exist')
+      }
+    },
+    isCorrectWordPath (path) {
+      return Array.isArray(path) && path.length === 2
+    }
+  },
+  directives: {
+    'click-outside': {
+      bind (el, binding, vNode) {
+        const handler = event => {
+          const target = event.target
+          if (el !== target && !el.contains(target)) {
+            binding.value(event)
+          }
+        }
+
+        el.__clickOutsideHandler__ = handler
+
+        document.addEventListener('click', el.__clickOutsideHandler__)
+      },
+      unbind (el) {
+        document.removeEventListener('click', el.__clickOutsideHandler__)
+      }
     }
   }
 }
@@ -127,10 +303,23 @@ export default {
 
 .word
   position: relative
+  cursor: pointer
+
+  &__chord-box
+    width: 72px
+    position: absolute
+    top: -100%
+    left: 0
+    z-index: 1
+    border: 1px solid red
+
+    input
+      width: 20px
+      display: inline-block
 
 .chord
-  top: -70%
   position: absolute
+  top: -70%
 
   &.left
     left: 0

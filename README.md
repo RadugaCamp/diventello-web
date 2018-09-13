@@ -1,29 +1,14 @@
 # diventello-web
-Diventello (web version) - Songs book for Raduga Camp (Moscow, 1999 - 2018)
+Diventello (web version) - Songs book
 
-Coming soon...
+## Разворачивание среды разработки
+Сборка проекта работает через (vue-cli)[https://cli.vuejs.org/] - систему сборки для проектов, построенных с использованием Vue.js 
 
-## Project setup
-```
-npm install
-```
+Установка состоит из нескольких простых этапов:
+- глобалная установка vue-cli `npm install -g @vue/cli`
+- установка всех зависимостей и разворачивание проекта через `npm install`, описанных в `package.json`
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Для локальной разработки достаточно запустить команду `npm run serve` - поднимится виртуальный сервер на `http://localhost:8077`
+Для сборки проекта запускаем `npm run build`, после чего собранные файлы (папка dist) переносятся на рабочий сервер
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
+*Дополнительные возможности сборки можно почитать в документации `vue-cli`*
