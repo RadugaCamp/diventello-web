@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import __DATA__ from './__DATA__.js'
+// import __DATA__ from './__DATA__.js'
 
 export default {
   name: 'Song',
@@ -67,7 +67,15 @@ export default {
     }
   },
   created () {
-    this.song = __DATA__
+    fetch('http://localhost:8078/song', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: this.$route.params.id
+      })
+    })
+      .then(res => res.json())
+      .then(item => (this.song = item))
   },
   methods: {
     setChord (wordPath) {
