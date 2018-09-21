@@ -4,6 +4,7 @@ import index from './router/index'
 import about from './router/about'
 import list from './router/list'
 import song from './router/song'
+import addSong from './router/addSong'
 
 Vue.use(Router)
 
@@ -14,6 +15,7 @@ export default new Router({
     { ...index },
     { ...about },
     { ...list },
+    { ...addSong },
     { ...song }
   ]
 })

@@ -1,5 +1,8 @@
 <template>
   <div class="song has-chords" v-click-outside="clickOutsideWord">
+    <div class="button">
+      <button @click="saveItem">Сохранить</button>
+    </div>
     <div
       v-for="(row, rowIndex) in song.rows"
       :key="rowIndex"
@@ -38,8 +41,6 @@
 </template>
 
 <script>
-// import __DATA__ from './__DATA__.js'
-
 export default {
   name: 'Song',
   data () {
@@ -67,15 +68,10 @@ export default {
     }
   },
   created () {
-    fetch('http://localhost:8078/song', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id: this.$route.params.id
-      })
-    })
+    fetch(`http://localhost:8078/api/song/${this.$route.params.id}`)
       .then(res => res.json())
       .then(item => (this.song = item))
+      .catch(console.log)
   },
   methods: {
     setChord (wordPath) {
@@ -119,6 +115,17 @@ export default {
     },
     isCorrectWordPath (path) {
       return Array.isArray(path) && path.length === 2
+    },
+    saveItem () {
+      fetch(`http://localhost:8078/api/song/${this.$route.params.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          item: this.song
+        })
+      })
+        .then(res => res.json())
+        .then(console.log)
     }
   },
   directives: {

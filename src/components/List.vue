@@ -7,8 +7,10 @@
       <router-link
         :to="`/song/${item._id}`"
         class="list__item"
-      >{{item._id}}</router-link>
+      >{{item.title}}</router-link>
+      <span @click.self="removeItem(item)"> | Удалить</span>
     </div>
+    <div v-if="!links.length">Песен нет</div>
   </div>
 </template>
 
@@ -21,14 +23,27 @@ export default {
     }
   },
   created () {
-    fetch('http://localhost:8078/list', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' }
-    })
+    fetch('http://localhost:8078/api/list')
       .then(res => res.json())
-      .then(links => {
-        this.links = links
+      .then(res => {
+        let { result: { list } } = res
+        this.links = list
       })
+      .catch(console.log)
+  },
+  methods: {
+    removeItem (item) {
+      fetch(`http://localhost:8078/api/song/${item._id}`, {
+        method: 'DELETE'
+      })
+        .then(res => res.json())
+        .then(({ result }) => {
+          let index = this.links.findIndex(item => item._id === result.id)
+          if (index !== -1) {
+            this.links.splice(index, 1)
+          }
+        })
+    }
   }
 }
 </script>

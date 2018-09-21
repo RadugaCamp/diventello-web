@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "convert": "node node_scripts/song_converter/converter.js",
-    "server": "nodemon server/index.js"
+    "api": "nodemon server/index.js"
   },
   "dependencies": {
     "vue": "^2.5.17",
