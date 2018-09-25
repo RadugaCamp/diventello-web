@@ -6,10 +6,7 @@
         v-for="item in items"
         :key="item.path"
       >
-        <router-link
-          class="menu__item"
-          :to="item.path"
-        >{{item.title}}</router-link>
+        <router-link :to="item.path">{{item.title}}</router-link>
       </div>
     </div>
   </div>
@@ -36,13 +33,18 @@ export default {
 
 <style lang="sass">
 .menu
-  padding: 30px
-  border: 1px solid #cad
+  background: #ccc
+  text-align: center
 
-  a
-    font-weight: bold
-    color: #2c3e50
+  &__item
+    padding: 10px 20px
+    position: relative
+    display: inline-block
 
-    &.router-link-exact-active
-      color: #42b983
+    a
+      color: #2c3e50
+      text-decoration: none
+
+      &.router-link-exact-active
+        color: #42b983
 </style>

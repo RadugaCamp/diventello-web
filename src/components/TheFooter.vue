@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="footer__info">&copy; 2018</div>
+    <div class="footer__info">&copy; 2018 diventello team</div>
   </div>
 </template>
 
@@ -10,7 +10,13 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .footer
-  border: 1px solid #ccc
+  padding-top: 20px
+  padding-bottom: 20px
+  border-top: 1px solid #ccc
+
+  &__info
+    font-size: 12px
+    text-align: center
 </style>

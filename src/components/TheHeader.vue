@@ -18,5 +18,5 @@ export default {
 
 <style lang="sass">
 .header
-  border: 1px solid #ccc
+  border-bottom: 1px solid #ccc
 </style>

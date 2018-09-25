@@ -42,10 +42,22 @@ export default {
 </script>
 
 <style lang="sass">
+@import "@/styles/normalize.scss"
+
+*
+  box-sizing: border-box
+
+.app
+
 .page
-  font-family: Arial, sans-serif
-  color: #2c3e50
+  font-family: roboto, sans-serif
+  line-height: 1.6
+  width: 100%
+  min-width: 320px
+  max-width: 768px
+  margin: 0 auto
+  box-shadow: 0 0 30px -6px #ccc
 
   &__content
-    background: #acb
+    padding: 30px 20px
 </style>

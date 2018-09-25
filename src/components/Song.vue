@@ -1,12 +1,11 @@
 <template>
-  <div class="song has-chords" v-click-outside="clickOutsideWord">
-    <div class="button">
-      <button @click="saveItem">Сохранить</button>
-    </div>
+  <div class="song" v-click-outside="clickOutsideWord">
+    <div class="song__title">{{song.title}}</div>
     <div
       v-for="(row, rowIndex) in song.rows"
       :key="rowIndex"
       class="song__row"
+      :class="{ 'has-chords': hasChordExist(row) }"
     >
       <span
         v-for="(wordInfo, wordIndex) in row"
@@ -32,10 +31,15 @@
             :key="chordIndex"
             v-model="chord.value"
             @keyup.enter="deactiveWords"
+            @keyup.esc="deactiveWords"
             type="text"
           >
         </span>
       </span>
+    </div>
+    <hr>
+    <div class="button">
+      <button @click="saveItem">Сохранить</button>
     </div>
   </div>
 </template>
@@ -126,6 +130,15 @@ export default {
       })
         .then(res => res.json())
         .then(console.log)
+    },
+    hasChordExist (row) {
+      for (let index = 0; index < row.length; index++) {
+        let item = row[index]
+        if (item.chords.some(chord => !!chord.value)) {
+          return true
+        }
+      }
+      return false
     }
   },
   directives: {
@@ -153,8 +166,12 @@ export default {
 <style lang="sass">
 .song
 
+  &__title
+    font-size: 16px
+    font-weight: bold
+    margin-bottom: 14px
+
   &__row
-    margin-bottom: 10px
 
   &__word
     padding-right: 6px
@@ -162,9 +179,8 @@ export default {
     &:last-child
       padding-right: 0
 
-  &.has-chords &__row
-    margin-top: 30px
-    margin-bottom: 30px
+  &__row.has-chords
+    margin-top: 10px
 
 .word
   position: relative
@@ -184,7 +200,7 @@ export default {
 
 .chord
   position: absolute
-  top: -70%
+  top: -100%
 
   &.left
     left: 0
